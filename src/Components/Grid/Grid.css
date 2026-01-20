@@ -1,0 +1,142 @@
+.grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    width: 100%;
+}
+
+.game-info {
+    display: flex;
+    gap: 2rem;
+    background: var(--bg-card);
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.player-turn {
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.player-turn.active {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    box-shadow: var(--shadow-sm);
+}
+
+.player-turn.active.player-o {
+    border-bottom: 2px solid var(--accent-neon);
+}
+
+.player-turn.active.player-x {
+    border-bottom: 2px solid var(--accent-pink);
+}
+
+.grid-container {
+    position: relative;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Custom Cursor for Player O (Blue/Neon) */
+.grid-container.turn-o .grid {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%2306b6d4" stroke="white" stroke-width="1.5"><path d="M10 21.0002C10.65 21.6 11.6 21.5 12.15 20.85L17.15 14.85H20.25C21.75 14.85 22.95 13.65 22.95 12.15C22.95 11.85 22.9 11.6 22.8 11.35L20.15 5.15002C19.8 4.30002 18.95 3.75002 18.05 3.75002H11.7C10.75 3.75002 9.90001 4.40002 9.65001 5.30002L9.05001 7.45002C8.95001 7.80002 8.65001 8.05002 8.30001 8.05002H6.55001V2.10002C6.55001 1.00002 5.50001 0.150024 4.45001 0.350024C3.65001 0.500024 3.05001 1.25002 3.05001 2.10002V13.35H2C1.45 13.35 1 13.8 1 14.35V16.35C1 16.9 1.45 17.35 2 17.35H3.05001L5.55001 19.35H10V21.0002Z"/></svg>') 16 0, pointer;
+}
+
+/* Custom Cursor for Player X (Red/Pink) */
+.grid-container.turn-x .grid {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%23ec4899" stroke="white" stroke-width="1.5"><path d="M10 21.0002C10.65 21.6 11.6 21.5 12.15 20.85L17.15 14.85H20.25C21.75 14.85 22.95 13.65 22.95 12.15C22.95 11.85 22.9 11.6 22.8 11.35L20.15 5.15002C19.8 4.30002 18.95 3.75002 18.05 3.75002H11.7C10.75 3.75002 9.90001 4.40002 9.65001 5.30002L9.05001 7.45002C8.95001 7.80002 8.65001 8.05002 8.30001 8.05002H6.55001V2.10002C6.55001 1.00002 5.50001 0.150024 4.45001 0.350024C3.65001 0.500024 3.05001 1.25002 3.05001 2.10002V13.35H2C1.45 13.35 1 13.8 1 14.35V16.35C1 16.9 1.45 17.35 2 17.35H3.05001L5.55001 19.35H10V21.0002Z"/></svg>') 16 0, pointer;
+}
+
+
+.winner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-lg);
+    animation: fadeIn 0.3s ease-out;
+    z-index: 10;
+}
+
+.winner-content {
+    text-align: center;
+}
+
+.winner-text {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, var(--accent-neon), var(--accent-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.reset-btn {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    transition: var(--transition);
+}
+
+.reset-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+.reset-btn-small {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.reset-btn-small:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 600px) {
+    .grid {
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .winner-text {
+        font-size: 2rem;
+    }
+
+    .reset-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}

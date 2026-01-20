@@ -1,0 +1,23 @@
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* color: white; Removed default white to allow specific colors */
+    transition: var(--transition);
+}
+
+.icon-circle {
+    color: var(--accent-neon);
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.6));
+    font-size: 3.5rem;
+}
+
+.icon-cross {
+    color: var(--accent-pink);
+    filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.6));
+    font-size: 4rem;
+}
+
+/* Removed empty ruleset */

@@ -1,0 +1,5 @@
+/* Global app layout overrides if necessary, mostly empty now as index.css handles defaults */
+.app {
+  min-height: 100vh;
+  width: 100%;
+}

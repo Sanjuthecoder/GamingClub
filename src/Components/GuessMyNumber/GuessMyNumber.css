@@ -1,0 +1,242 @@
+/* Modern Styles for Guess My Number */
+.guess-game-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    /* Handled by parent container backdrop */
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    /* Use app font */
+}
+
+/* Card Container */
+.guess-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* Header Section */
+.guess-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.guess-title-group h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.guess-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.again-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.again-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Main Content Grid */
+.guess-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+/* Left Section: Input */
+.guess-section-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.secret-box {
+    width: 100px;
+    height: 100px;
+    background: var(--bg-dark);
+    border: 2px solid var(--accent-pink);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-pink);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.secret-box.revealed {
+    width: 200px;
+    background: var(--accent-pink);
+    color: white;
+    transform: scale(1.1);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+}
+
+.guess-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    font-size: 2rem;
+    color: white;
+    width: 150px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.guess-input:focus {
+    border-color: var(--accent-neon);
+}
+
+.check-btn {
+    background: linear-gradient(135deg, var(--accent-neon), var(--primary));
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: var(--radius-full);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+    transition: all 0.2s;
+}
+
+.check-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(6, 182, 212, 0.4);
+}
+
+/* Right Section: Stats */
+.guess-section-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.message {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    min-height: 2.5rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    color: white;
+    font-weight: 700;
+}
+
+/* Audio Controls */
+.audio-control-mini {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    opacity: 0.5;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-control-mini:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.audio-control-mini.playing {
+    opacity: 1;
+    color: var(--accent-neon);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(6, 182, 212, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .guess-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .guess-card {
+        padding: 1.5rem;
+    }
+
+    .secret-box {
+        margin: 0 auto;
+    }
+}
