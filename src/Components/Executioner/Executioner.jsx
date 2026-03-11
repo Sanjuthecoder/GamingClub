@@ -328,7 +328,7 @@ const Executioner = () => {
                 <div className="exc-overlay">
                     <div className="exc-modal">
                         <h2>The Executioner</h2>
-                        <p>A life is on the line. You have 30 seconds to solve the puzzle.</p>
+                        <p>Save a life while learning words and strengthening math skills. You have 30 seconds!</p>
                         <h3>Choose Category:</h3>
                         <div className="exc-actions row-actions" style={{ marginTop: '20px' }}>
                             <button className="exc-btn primary-btn" onClick={() => { setGameType('letters'); setGameState('length_select'); }}>🔤 Play with Letters</button>

@@ -16,7 +16,7 @@ function GameSelection({ onSelectGame }) {
             id: 'executioner',
             name: 'Executioner',
             icon: <FaSkullCrossbones />,
-            description: 'Save a life by solving the 5-letter word puzzle before time runs out!',
+            description: 'Save a life while learning words and strengthening math skills!',
             active: true,
             color: '#ff4d4d'
         },
