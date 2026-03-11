@@ -101,33 +101,30 @@ const Executioner = () => {
         initAudio();
         setWordLength(length);
         setScore(0);
-        setGameState('playing');
 
-        // Timeout to ensure state commits before generating
-        setTimeout(() => {
-            const word = getRandomWord(length);
-            setCurrentWord(word);
-            const shuffled = shuffleLetters(word).map((char, index) => ({ id: `L${index}`, char }));
-            setScrambledLetters(shuffled);
-            setSelectedLetters([]);
-            setTimeLeft(30);
-        }, 0);
+        const word = getRandomWord(length);
+        setCurrentWord(word);
+        const shuffled = shuffleLetters(word).map((char, index) => ({ id: `L${index}`, char }));
+        setScrambledLetters(shuffled);
+        setSelectedLetters([]);
+        setTimeLeft(30);
+
+        // Let game start last so state is fully prepared
+        setGameState('playing');
     };
 
     const startGameNumbers = (numDigits) => {
         initAudio();
         setDigits(numDigits);
         setScore(0);
-        setGameState('playing');
 
-        // Timeout to ensure state commits
-        setTimeout(() => {
-            const problem = generateMathProblem(operator, numDigits);
-            setMathProblemStr(problem.equationString);
-            setMathAnswer(problem.mathAnswer);
-            setSelectedNumbers([]);
-            setTimeLeft(30);
-        }, 0);
+        const problem = generateMathProblem(operator, numDigits);
+        setMathProblemStr(problem.equationString);
+        setMathAnswer(problem.mathAnswer);
+        setSelectedNumbers([]);
+        setTimeLeft(30);
+
+        setGameState('playing');
     };
 
     const handleNextLevel = () => {
@@ -138,6 +135,7 @@ const Executioner = () => {
     const handleBackToMenu = () => {
         setGameState('start');
         setScore(0);
+        setTimeLeft(30);
     };
 
     // Timer logic
