@@ -3,6 +3,7 @@ import GameSelection from './Components/GameSelection/GameSelection';
 import Grid from './Components/Grid/Grid';
 import BubbleGame from './Components/BubbleGame/BubbleGame';
 import GuessMyNumber from './Components/GuessMyNumber/GuessMyNumber';
+import Executioner from './Components/Executioner/Executioner';
 import GameContainer from './Components/Layout/GameContainer';
 import './App.css';
 
@@ -23,12 +24,17 @@ function App() {
         <GameSelection onSelectGame={handleGameSelect} />
       ) : (
         <GameContainer
-          title={activeGame === 'tic-tac-toe' ? 'Tic Tac Toe' : 'Game'}
+          title={
+            activeGame === 'tic-tac-toe' ? 'Tic Tac Toe' :
+              activeGame === 'executioner' ? 'Executioner' :
+                'Game'
+          }
           onBack={handleBack}
         >
           {activeGame === 'tic-tac-toe' && <Grid numberOfCards={9} />}
           {activeGame === 'bubble-game' && <BubbleGame />}
           {activeGame === 'guess-my-number' && <GuessMyNumber />}
+          {activeGame === 'executioner' && <Executioner />}
         </GameContainer>
       )}
     </div>

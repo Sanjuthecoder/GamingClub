@@ -1,0 +1,759 @@
+.executioner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background: radial-gradient(circle at top, #1a0b0b, #050101);
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(255, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+.exc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 60, 60, 0.2);
+}
+
+.exc-score {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.exc-score span {
+    color: #ff4d4d;
+    text-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+}
+
+.exc-timer {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.danger-pulse {
+    color: #ff1a1a;
+    animation: dangerPulse 1s infinite alternate;
+}
+
+@keyframes dangerPulse {
+    from {
+        text-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff1a1a;
+        transform: scale(1);
+    }
+
+    to {
+        text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+        transform: scale(1.1);
+    }
+}
+
+/* Scene */
+.exc-scene {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin: 30px 0;
+    border-bottom: 2px solid #332;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.gallows {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+    width: 150px;
+    height: 200px;
+}
+
+.g-base {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
+    height: 10px;
+    background: #4a3b32;
+    border-radius: 4px;
+}
+
+.g-pole {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 10px;
+    height: 100%;
+    background: #4a3b32;
+}
+
+.g-top {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 80px;
+    height: 10px;
+    background: #4a3b32;
+}
+
+.g-rope {
+    position: absolute;
+    top: 10px;
+    left: 95px;
+    width: 4px;
+    background: #b89873;
+    transition: height 0.5s ease;
+    z-index: 10;
+}
+
+/* Victim */
+.victim {
+    position: absolute;
+    bottom: 40px;
+    left: calc(40% + 80px);
+    /* Center under rope */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), bottom 0.5s ease;
+    z-index: 5;
+}
+
+.victim.hanged {
+    bottom: 20px;
+    transform: rotate(5deg);
+    animation: swing 3s ease-in-out infinite alternate;
+}
+
+.victim.running-away {
+    animation: runAway 2.5s forwards ease-in;
+}
+
+@keyframes runAway {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    20% {
+        transform: translateX(-30px) translateY(-10px) rotate(-10deg);
+    }
+
+    40% {
+        transform: translateX(-80px) translateY(0) rotate(10deg);
+    }
+
+    60% {
+        transform: translateX(-150px) translateY(-10px) rotate(-10deg);
+    }
+
+    80% {
+        transform: translateX(-250px) translateY(0) rotate(10deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-400px) translateY(-10px) rotate(-10deg);
+        opacity: 0;
+    }
+}
+
+@keyframes swing {
+    from {
+        transform: rotate(5deg);
+    }
+
+    to {
+        transform: rotate(-5deg);
+    }
+}
+
+.v-head {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: -5px;
+    z-index: 6;
+}
+
+.v-body {
+    width: 20px;
+    height: 40px;
+    background: #8aa;
+    border-radius: 10px;
+}
+
+.v-arms {
+    position: absolute;
+    top: 40px;
+    width: 40px;
+    height: 5px;
+    background: #8aa;
+    border-radius: 5px;
+}
+
+.v-legs {
+    position: absolute;
+    top: 70px;
+    width: 25px;
+    height: 30px;
+    border: 5px solid #688;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-sizing: border-box;
+}
+
+/* Trapdoor */
+.trapdoor {
+    position: absolute;
+    bottom: 0;
+    left: calc(40% + 70px);
+    width: 60px;
+    height: 10px;
+    background: #3b2c23;
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+    transform-origin: left bottom;
+}
+
+.trapdoor.open {
+    transform: rotate(-80deg);
+}
+
+/* Executioner */
+.executioner-figure {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 1s linear;
+    z-index: 10;
+}
+
+.e-head {
+    font-size: 2.2rem;
+    line-height: 1;
+    margin-bottom: -5px;
+}
+
+.e-body {
+    width: 30px;
+    height: 60px;
+    background: #222;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.e-body::after {
+    content: "🗡️";
+    position: absolute;
+    right: -15px;
+    top: 30px;
+    font-size: 2rem;
+    transform: rotate(45deg);
+}
+
+/* Lever */
+.lever-container {
+    position: absolute;
+    bottom: 0;
+    right: 180px;
+    width: 30px;
+    height: 40px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #555;
+}
+
+.lever {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 8px;
+    height: 50px;
+    background: #ccc;
+    transform-origin: bottom center;
+    transform: rotate(-30deg);
+    transition: transform 0.3s ease;
+    border-radius: 4px;
+}
+
+.lever::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -4px;
+    width: 16px;
+    height: 16px;
+    background: #ff3333;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ff0000;
+}
+
+.lever.pulled {
+    transform: rotate(30deg);
+}
+
+
+/* Slots */
+.exc-slots {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.exc-slot {
+    width: 60px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.exc-slot.filled {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.15);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.exc-slot.filled:hover {
+    border-color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    color: #ffcccc;
+}
+
+/* Letters */
+.exc-letters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.exc-letter-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    box-shadow: 5px 5px 10px #0a0a0a, -5px -5px 10px #2a2a2a;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.exc-letter-btn:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+    color: #ff6666;
+}
+
+.exc-letter-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.exc-letter-btn:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Buttons and Modals */
+.exc-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.exc-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.exc-btn.primary-btn {
+    background: linear-gradient(45deg, #ff1a1a, #cc0000);
+    box-shadow: 0 4px 15px rgba(255, 26, 26, 0.4);
+}
+
+.exc-btn.primary-btn:hover {
+    background: linear-gradient(45deg, #ff3333, #e60000);
+    box-shadow: 0 6px 20px rgba(255, 26, 26, 0.6);
+    transform: translateY(-2px);
+}
+
+.small-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.exc-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.exc-modal {
+    background: linear-gradient(135deg, #1f1f1f, #111);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 450px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.exc-modal h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #ff4d4d, #ff9999);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.exc-modal p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.exc-word-reveal {
+    font-size: 2.5rem !important;
+    font-weight: bold;
+    color: #fff !important;
+    letter-spacing: 5px;
+    margin: 20px 0 !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.victory h2 {
+    background: linear-gradient(to right, #4dff88, #99ffbb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.defeat h2 {
+    background: linear-gradient(to right, #ff0000, #ff4d4d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Math UI additions */
+.exc-math-problem {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffcccc;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+    text-align: center;
+}
+
+.exc-num-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+
+.exc-num-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.exc-num-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+}
+
+.exc-num-btn:active {
+    transform: translateY(1px);
+}
+
+.action-btn {
+    background: rgba(255, 77, 77, 0.2);
+    color: #ff9999;
+    font-size: 1.2rem;
+}
+
+.action-btn:hover {
+    background: rgba(255, 77, 77, 0.4);
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .executioner-container {
+        padding: 15px;
+        height: auto;
+        min-height: 100%;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .exc-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 15px;
+    }
+
+    .exc-scene {
+        margin: 15px 0;
+        height: 200px;
+        /* Scale down scene vertically */
+        transform: scale(0.9);
+        transform-origin: bottom center;
+    }
+
+    .lever-container {
+        right: 120px;
+        /* Bring lever closer in */
+    }
+
+    .exc-slots {
+        gap: 10px;
+    }
+
+    .exc-slot {
+        width: 50px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .exc-letters {
+        gap: 10px;
+    }
+
+    .exc-letter-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+    }
+
+    .exc-math-problem {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .exc-num-pad {
+        gap: 10px;
+        max-width: 250px;
+    }
+
+    .exc-num-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .exc-modal {
+        padding: 25px;
+        width: 90%;
+    }
+}
+
+/* Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .executioner-container {
+        padding: 10px;
+    }
+
+    .exc-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .exc-timer {
+        font-size: 2rem;
+        order: -1;
+        /* Put timer on top */
+    }
+
+    .exc-scene {
+        height: 180px;
+        transform: scale(0.7);
+        /* Scale scene more for small phones */
+        margin-bottom: 20px;
+    }
+
+    .gallows {
+        left: 25%;
+    }
+
+    .victim {
+        left: calc(25% + 80px);
+    }
+
+    .trapdoor {
+        left: calc(25% + 70px);
+    }
+
+    .lever-container {
+        right: 80px;
+    }
+
+    .executioner-figure {
+        right: 10px;
+    }
+
+    .exc-slots {
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    .exc-slot {
+        width: 45px;
+        height: 50px;
+        font-size: 1.2rem;
+        border-radius: 8px;
+    }
+
+    .exc-letters {
+        gap: 8px;
+    }
+
+    .exc-letter-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .exc-math-problem {
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+    }
+
+    .exc-num-pad {
+        gap: 8px;
+        max-width: 220px;
+        margin-bottom: 10px;
+    }
+
+    .exc-num-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .action-btn {
+        font-size: 1rem;
+    }
+
+    .exc-modal h2 {
+        font-size: 1.8rem;
+    }
+
+    .exc-word-reveal {
+        font-size: 2rem !important;
+        letter-spacing: 3px;
+    }
+
+    .exc-actions {
+        margin-top: 15px;
+    }
+}
+
+
+.exc-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.exc-actions.row-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.exc-rules {
+    text-align: left;
+    margin-bottom: 30px;
+    color: #bbb;
+}
+
+.exc-rules li {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+
+    to {
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Fix CSS vars or inheritances */
+.exc-modal .exc-actions {
+    margin-top: 30px;
+}

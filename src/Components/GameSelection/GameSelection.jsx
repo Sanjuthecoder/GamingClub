@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGamepad, FaChess, FaPuzzlePiece, FaChartPie, FaQuestionCircle } from 'react-icons/fa';
+import { FaGamepad, FaChess, FaPuzzlePiece, FaChartPie, FaQuestionCircle, FaSkullCrossbones } from 'react-icons/fa';
 import './GameSelection.css';
 
 function GameSelection({ onSelectGame }) {
@@ -11,6 +11,14 @@ function GameSelection({ onSelectGame }) {
             description: 'Classic strategy game for 2 players',
             active: true,
             color: 'var(--primary)'
+        },
+        {
+            id: 'executioner',
+            name: 'Executioner',
+            icon: <FaSkullCrossbones />,
+            description: 'Save a life by solving the 5-letter word puzzle before time runs out!',
+            active: true,
+            color: '#ff4d4d'
         },
         {
             id: 'bubble-game',
